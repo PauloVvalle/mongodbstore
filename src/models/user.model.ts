@@ -1,8 +1,6 @@
 import mongoose, { Document, Schema } from "mongoose";
-import bcrypt from 'bcrypt';
 
 interface IUser extends Document {
-    // _id: mongoose.Types.ObjectId;
     user_name: string;
     user_username: string;
     user_password: string;
@@ -14,6 +12,9 @@ interface IUser extends Document {
     user_street: string;
     user_number: number;
     user_cep: string;
+    user_petname: string;
+    user_pettype: string;
+    user_vaccination_date: Date;
 }
 
 const userSchema = new Schema({
@@ -28,7 +29,18 @@ const userSchema = new Schema({
     user_street: { type: String, required: true },
     user_number: { type: Number, required: true },
     user_cep: { type: String, required: true },
+    user_petname: { type: String, required: true },
+    user_pettype: { type: String, required: true },
+    user_vaccination_date: { type: Date, required: false }, 
 });
+
+
+
+
+const User = mongoose.model<IUser>('User', userSchema);
+
+export default User;
+
 
 // userSchema.pre<IUser>('save', async function(next) {
 //     if (this.isModified('user_password')) {
@@ -37,7 +49,3 @@ const userSchema = new Schema({
 //     }
 //     next();
 // });
-
-const User = mongoose.model<IUser>('User', userSchema);
-
-export default User;
