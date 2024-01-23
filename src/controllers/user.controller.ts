@@ -51,6 +51,7 @@ const jsonSecret = 'jhaissdfsdvsqwhdiash';
 
 export const createUser = async (req: Request, res: Response): Promise<void> => {
     try {
+
         fileUpload.single('user_image')(req, res, async (err: any) => {
             if (err) {
                 console.error('Erro ao fazer upload da imagem: ', err)
@@ -73,6 +74,7 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
             req.body.user_image = user_image;
 
             const newUser = new User(req.body);
+            console.log(newUser)
             const savedUser = await newUser.save();
             res.status(200).json(savedUser);
         })
@@ -124,3 +126,4 @@ export const getUser = async (req: Request, res: Response) => {
     const user: typeof User | null = await User.findById(req.params.id);
     res.json(user);
   };
+

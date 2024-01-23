@@ -7,6 +7,7 @@ import productRoutes from './routes/product.routes';
 import categoryRoutes from './routes/category.routes';
 import userRoutes from './routes/user.routes';
 import authRoutes from './routes/auth.routes';
+import adminRoutes from './routes/admin.Routes';
 import path from 'path';
 // import cartRoutes from './routes/cart.routes';
 import cors from 'cors';
@@ -36,6 +37,7 @@ mongoose.connect(process.env.DB_URI! as string, {
   family: 4,
 });
 
+
 mongoose.connection.on("connected", () => {
     console.log("Conexão com o MongoDB estabelecida com sucesso!")
 })
@@ -56,6 +58,11 @@ app.use('/imagem', express.static(path.join(__dirname, '../uploads')));
 app.use('/api/users', userRoutes);
 
 app.use('/auth', authRoutes);
+
+app.use('/admin', adminRoutes);
+
+app.use('/user', userRoutes);
+
 
 // // Carts Routes
 // app.use('/api/carts', cartRoutes);
